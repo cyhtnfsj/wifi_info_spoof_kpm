@@ -11,13 +11,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install aarch64 toolchain
+      - name: Install toolchain
         run: sudo apt-get install -y gcc-aarch64-linux-gnu
 
       - name: Build
         run: make
 
-      - name: Upload artifact
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: wifi_info_spoof_kpm

@@ -1,0 +1,24 @@
+name: Build KPM
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install aarch64 toolchain
+        run: sudo apt-get install -y gcc-aarch64-linux-gnu
+
+      - name: Build
+        run: make
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wifi_info_spoof_kpm
+          path: wifi_info_spoof.kpm

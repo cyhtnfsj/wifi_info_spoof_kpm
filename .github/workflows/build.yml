@@ -1,0 +1,27 @@
+name: Build KPM
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install toolchain
+        run: sudo apt-get install -y gcc-aarch64-linux-gnu
+
+      - name: Clone KernelPatch SDK
+        run: git clone --depth=1 https://github.com/bmax121/KernelPatch.git
+
+      - name: Build
+        run: make
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: wifi_info_spoof_kpm
+          path: wifi_info_spoof.kpm
